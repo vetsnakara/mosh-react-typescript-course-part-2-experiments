@@ -9,7 +9,12 @@ interface Post {
   userId: number;
 }
 
-export const usePosts = (userId: string | undefined) => {
+interface PostQuery {
+  page: number;
+  pageSize: number;
+}
+
+export const usePosts = (query: PostQuery) => {
   const fetchPosts =
     (config: AxiosRequestConfig = {}) =>
     () =>
@@ -18,12 +23,14 @@ export const usePosts = (userId: string | undefined) => {
         .then((res) => res.data);
 
   return useQuery<Post[], Error>({
-    queryKey: userId ? ["users", userId, "posts"] : ["posts"], // like deps array in useEffect
+    queryKey: ["posts", query],
     queryFn: fetchPosts({
       params: {
-        userId,
+        _start: (query.page - 1) * query.pageSize,
+        _limit: query.pageSize,
       },
     }),
     staleTime: 1 * 60 * 1000, // 1min
+    keepPreviousData: true, // no isLoading=true between queries
   });
 };
