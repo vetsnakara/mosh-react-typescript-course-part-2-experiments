@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
 export class ApiClient<T> {
   constructor(public endpoint: string) {}
 
-  getAll = () => axiosInstance.get<T>(this.endpoint).then((res) => res.data);
+  getAll = () => axiosInstance.get<T[]>(this.endpoint).then((res) => res.data);
 
   post = (data: T) =>
     axiosInstance.post<T>(this.endpoint, data).then((res) => res.data);
