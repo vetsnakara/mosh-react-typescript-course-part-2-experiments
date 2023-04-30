@@ -1,6 +1,6 @@
-import { useAuth } from "./hooks/useAuth";
+import { useAuth } from "./useAuth";
 
-const LoginStatus = () => {
+export const LoginStatus = () => {
   const { user, dispatch } = useAuth();
 
   if (user)
@@ -25,5 +25,3 @@ const LoginStatus = () => {
     </div>
   );
 };
-
-export default LoginStatus;

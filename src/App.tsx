@@ -3,7 +3,7 @@ import "./App.css";
 import NavBar from "./state-management/NavBar";
 import HomePage from "./state-management/HomePage";
 
-import { AuthProvider } from "./state-management/AuthProvider";
+import { AuthProvider } from "./state-management/auth";
 import { TasksProvider } from "./state-management/tasks";
 
 function App() {
